@@ -24,9 +24,6 @@ const Footer = () => {
                 {link}
             </nav>
             <nav>
-                {link}
-            </nav>
-            <nav>
                 {link2}
             </nav>
             <form>

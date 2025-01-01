@@ -4,17 +4,17 @@ import { AuthContext } from '../../AuthProvider/Provider';
 
 const NavBar = () => {
 
-    const {user, logOut} = useContext(AuthContext);
+    const { user, logOut } = useContext(AuthContext);
 
-    
-    
-    
+
+
+
 
     const link = <>
+        <li><NavLink to="/">Home</NavLink></li>
+        <li><NavLink to="/rooms">Rooms</NavLink></li>
+        <li><NavLink to="/myBookings">My Bookings</NavLink></li>
 
-        <li><NavLink to="/item1">Item 1</NavLink></li>
-        <li><NavLink to="/item3">Item 3</NavLink></li>
-        <li><NavLink to="/item4">Item 3</NavLink></li>
 
 
     </>
@@ -57,7 +57,7 @@ const NavBar = () => {
             <div className="navbar-end px-2 gap-6">
 
                 <div className="w-11 rounded-full overflow-hidden">
-                    <img 
+                    <img
                         alt="Tailwind CSS Navbar component"
                         src={user?.photoURL} />
                 </div>
