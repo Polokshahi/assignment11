@@ -1,21 +1,67 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../AuthProvider/Provider';
+import { updateProfile } from 'firebase/auth';
+import { auth } from '../Firebase.init';
 
 const Register = () => {
+
+    const {register, setUser} = useContext(AuthContext);
+    const navigate = useNavigate();
+
+
+    const handleRegister = e => {
+        e.preventDefault();
+
+        const name = e.target.name.value;
+        const email = e.target.email.value;
+        const photoURL = e.target.photoURL.value;
+        const password = e.target.password.value;
+
+        console.log(name, email, photoURL, password)
+
+        register(email, password)
+        .then(result => {
+            console.log(result)
+            setUser(result)
+            updateProfile(auth.currentUser, {
+                displayName: name,
+                photoURL: photoURL
+            })
+            navigate('/');
+
+        })
+        .catch(error => console.log(error))
+        setUser('')
+
+
+        
+
+
+
+    }
+
+
+
+
+
+
+
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
             <div className="w-full max-w-md p-6 space-y-6 bg-white shadow-lg rounded-lg">
                 <h2 className="text-2xl font-semibold text-center text-gray-700">Create an Account</h2>
 
                 {/* Registration Form */}
-                <form className="space-y-4">
+                <form onSubmit={handleRegister} className="space-y-4">
                     {/* Name Field */}
                     <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-600">Name</label>
                         <input
                             type="text"
                             id="name"
-                            value={name}
+                            name='name'
+                           
 
                             className="w-full p-2 border border-gray-300 rounded-md"
                             placeholder="Enter your name"
@@ -28,6 +74,7 @@ const Register = () => {
                         <input
                             type="email"
                             id="email"
+                            name='email'
 
 
                             className="w-full p-2 border border-gray-300 rounded-md"
@@ -43,6 +90,7 @@ const Register = () => {
                             id="photoURL"
                             className="w-full p-2 border border-gray-300 rounded-md"
                             placeholder="Enter your photo URL (optional)"
+                            name='photoURL'
                         />
                     </div>
 
@@ -54,6 +102,7 @@ const Register = () => {
                             id="password"
                             className="w-full p-2 border border-gray-300 rounded-md"
                             placeholder="Enter your password"
+                            name='password'
                         />
                     </div>
 
