@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const NavBar = () => {
 
@@ -15,6 +15,7 @@ const NavBar = () => {
         <div className="navbar bg-base-100">
             <div className="navbar-start">
                 <div className="dropdown">
+
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -42,8 +43,21 @@ const NavBar = () => {
                     {link}
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Button</a>
+
+
+
+
+            <div className="navbar-end px-2 gap-6">
+
+                <div className="w-10 rounded-full">
+                    <img 
+                        alt="Tailwind CSS Navbar component"
+                        src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
+                </div>
+
+                <button className='btn'><NavLink to={'/login'}>Login</NavLink></button>
+                <button className='btn'><NavLink to={'/register'}>Register</NavLink></button>
+
             </div>
         </div>
     );
