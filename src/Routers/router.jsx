@@ -8,6 +8,7 @@ import Login from "../Page/Login";
 import Register from "../Page/Register";
 import MyBooking from "../Component/MyBooking/MyBooking";
 import Rooms from "../Component/Rooms/Rooms";
+import ErrorPage from "../Page/ErrorPage";
 
 
 const router = createBrowserRouter([
@@ -40,10 +41,17 @@ const router = createBrowserRouter([
             {
                 path: '/mybookings',
                 element: <MyBooking></MyBooking>
+            },
+            
+            {
+                path: '*',
+                element: <ErrorPage></ErrorPage>,
             }
 
 
         ],
+
+       
     }
 
    
