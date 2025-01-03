@@ -1,11 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const RoomCard = ({ room }) => {
   const { roomId, roomNumber, type, price, availability, description, bedType, image } = room;
 
   return (
-  
-     <div className="card w-96 bg-base-100 shadow-xl">
+    <Link to={`/rooms/room_details_page/${roomId}`} className="card w-96 bg-base-100 shadow-xl hover:shadow-2xl transition-all">
       <figure>
         <img src={image} alt={`Room ${roomNumber}`} className="w-full h-64 object-cover" />
       </figure>
@@ -20,10 +20,8 @@ const RoomCard = ({ room }) => {
           </span>
         </div>
         <p className="text-sm text-gray-500">Bed Type: {bedType}</p>
-       
       </div>
-    </div>
-
+    </Link>
   );
 };
 
