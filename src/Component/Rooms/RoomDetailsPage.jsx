@@ -45,12 +45,7 @@ const RoomDetailsPage = () => {
     return (
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             {/* Back Button */}
-            <button 
-                onClick={() => navigate(-1)} 
-                className="btn btn-secondary mb-4"
-            >
-                Go Back
-            </button>
+           
 
             {/* Room Details Card */}
             <div className="card w-96 bg-base-100 shadow-xl">
@@ -81,6 +76,12 @@ const RoomDetailsPage = () => {
                     >
                         Book Now
                     </button>
+                    <button 
+                onClick={() => navigate(-1)} 
+                className="btn btn-secondary mb-4"
+            >
+                Go Back
+            </button>
                 </div>
             </div>
 
