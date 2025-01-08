@@ -10,8 +10,44 @@ const Rooms = () => {
     useEffect(() => {
         fetch('http://localhost:3000/rooms')
         .then(res => res.json())
-        .then(data => setRooms(data))
+        .then(data => {
+            setRooms(data)
+            // forBackend(data);
+        })
+
+
+        
+
+
+
+
+
+
+
     },[])
+
+
+
+    // const forBackend = async (roomData) => {
+    //     try {
+    //         const rooms = await fetch('http://localhost:3000/rooms', { // Replace with your backend URL
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //             },
+    //             body: JSON.stringify(roomData), // Send the JSON data to the backend
+    //         });
+    //         if (rooms.ok) {
+    //             const result = await rooms.json();
+    //             console.log('Rooms uploaded successfully:', result);
+    //         } else {
+    //             console.error('Failed to upload rooms:', rooms.statusText);
+    //         }
+    //     } catch (error) {
+    //         console.error('Error uploading rooms:', error);
+    //     }
+
+    // }
 
     
 

@@ -13,6 +13,8 @@ import PrivateRoute from "./PrivateRoute";
 import RoomDetailsPage from "../Component/Rooms/RoomDetailsPage";
 
 
+
+
 const router = createBrowserRouter([
 
     {
@@ -50,8 +52,17 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myBookings',
-                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>
+                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
+                loader: () => fetch(`http://localhost:3000/myBooking`)
             },
+
+            {
+                path: "/myBookings/:id",
+                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
+                loader: () => fetch("http://localhost:3000/myBooking"), // Fetch all bookings
+            },
+
+          
 
             {
                 path: '*',

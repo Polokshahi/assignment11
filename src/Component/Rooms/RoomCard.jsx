@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 const RoomCard = ({ room }) => {
   const { roomId, roomNumber, type, price, availability, description, bedType, image } = room;
+  console.log(roomId);
 
   return (
     <Link to={`/rooms/room_details_page/${roomId}`} className="card w-96 bg-base-100 shadow-xl hover:shadow-2xl transition-all">
