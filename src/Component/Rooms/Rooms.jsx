@@ -8,7 +8,7 @@ const Rooms = () => {
     const [rooms, setRooms] = useState();
 
     useEffect(() => {
-        fetch('http://localhost:3000/rooms')
+        fetch('../../../public/Hotel.json')
         .then(res => res.json())
         .then(data => {
             setRooms(data)
