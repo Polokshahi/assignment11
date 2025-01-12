@@ -4,7 +4,7 @@ import { AuthContext } from '../AuthProvider/Provider';
 
 const Login = () => {
 
-    const {signIn, setUser, user} = useContext(AuthContext);
+    const {signIn, setUser, googleSignIn, user} = useContext(AuthContext);
     const navigate = useNavigate();
 
   
@@ -38,6 +38,12 @@ const Login = () => {
 
 
     }
+
+
+    // google login
+
+
+  
 
 
 
@@ -96,7 +102,7 @@ const Login = () => {
         {/* google login */}
 
         <button
-            className="w-full p-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+            className="w-full p-2 bg-red-500 text-white rounded-md hover:bg-red-600" onClick={handleGoogleLogin}
           >
             Google Login
           </button>

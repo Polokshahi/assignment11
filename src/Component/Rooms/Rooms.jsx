@@ -5,7 +5,7 @@ const Rooms = () => {
   const [rooms, setRooms] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/rooms')
+    fetch('http://localhost:3000/allroom')
       .then(res => res.json())
       .then(data => {
         // Slice the first 20 rooms and set them in state

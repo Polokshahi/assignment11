@@ -56,11 +56,13 @@ const NavBar = () => {
 
             <div className="navbar-end px-2 gap-6">
 
-                <div className="w-11 rounded-full overflow-hidden">
-                    <img
-                        alt="Tailwind CSS Navbar component"
-                        src={user?.photoURL} />
-                </div>
+            {
+                user ? <div className="w-11 rounded-full overflow-hidden">
+                <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user?.photoURL} />
+            </div> : ''
+            }
 
                 {user ? <button onClick={logOut} className='btn'><NavLink to={'/login'}>LogOut</NavLink></button> : <button className='btn'><NavLink to={'/login'}>Login</NavLink></button>}
                 {user ? '' : <button className='btn'><NavLink to={'/register'}>Register</NavLink></button>}

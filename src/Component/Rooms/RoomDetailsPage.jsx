@@ -8,7 +8,7 @@ const RoomDetailsPage = () => {
     const roomData = useLoaderData();
     const navigate = useNavigate();
 
-    const singleRoomData = roomData.find((room) => room.roomId == roomId);
+    const singleRoomData = roomData?.find((room) => room.roomId == roomId);
 
     if (!singleRoomData) {
         return <div>Room not found</div>;
