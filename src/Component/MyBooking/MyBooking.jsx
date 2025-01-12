@@ -1,41 +1,40 @@
 import React from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 const MyBooking = () => {
-    // const location = useLocation();
-    // const bookingData = location.state;
-    const bookingData = useLoaderData();
+  const bookData = useLoaderData();
+  const bookedRooms = bookData?.bookedRooms || []; // Access booked rooms
 
 
-    
+  console.log(bookedRooms);
 
-
-
-    if (!bookingData) {
-        return <div>No booking data available</div>;
-    }
-
-    const { roomNumber, type, price, description, bedType, selectedDate } = bookingData;
-
-    return (
-        <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <div className="card w-96 bg-base-100 shadow-xl">
-                <div className="card-body">
-                    <h2 className="card-title">Booking Confirmation</h2>
-                    <p><strong>Room Number:</strong> {roomNumber}</p>
-                    <p><strong>Type:</strong> {type}</p>
-                    <p><strong>Price:</strong> ${price} / night</p>
-                    <p><strong>Bed Type:</strong> {bedType}</p>
-                    <p><strong>Date:</strong> {selectedDate}</p>
-                    <p>{description}</p>
+  return (
+    <div className="py-8 px-4">
+      <h2 className="text-2xl font-bold text-center mb-6">My Bookings</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {bookedRooms.length > 0 ? (
+          bookedRooms.map((room) => (
+            <div key={room.roomId} className="card w-full bg-base-100 shadow-xl">
+              <figure>
+                <img src={room.image} alt={room.roomNumber} className="object-cover h-48 w-full" />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{room.roomNumber}</h2>
+                <p>{room.description}</p>
+                <p><strong>Price:</strong> ${room.price}</p>
+                <p><strong>Booked on:</strong> {room.bookedDate}</p>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">Details</button>
                 </div>
-                <div className='flex justify-end p-4'>
-                    <button className='btn bg-slate-500 text-white'>Cancel</button>
-                    <button className='btn bg-purple-600 text-white' >Updata Date</button>
-                </div>
+              </div>
             </div>
-        </div>
-    );
+          ))
+        ) : (
+          <div className="col-span-4 text-center text-lg">No bookings found.</div>
+        )}
+      </div>
+    </div>
+  );
 };
 
 export default MyBooking;

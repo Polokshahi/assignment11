@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useLoaderData, useParams, useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import MyBooking from '../MyBooking/MyBooking';
 
 const RoomDetailsPage = () => {
     const { roomId } = useParams();
@@ -19,6 +20,8 @@ const RoomDetailsPage = () => {
     const [availability, setAvailability] = useState(singleRoomData.availability);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedDate, setSelectedDate] = useState(null);
+    const [booking, setBooking] = useState(singleRoomData);
+    console.log(booking)
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
@@ -137,6 +140,8 @@ const RoomDetailsPage = () => {
                     </div>
                 </div>
             )}
+
+            
         </div>
     );
 };
@@ -148,13 +153,20 @@ export default RoomDetailsPage;
 
 
 
+
+
+// myyyyyyyyyyybooking
+
 import React from 'react';
-import { useLoaderData, useLocation } from 'react-router-dom';
+import { useLoaderData  } from 'react-router-dom';
 
 const MyBooking = () => {
     // const location = useLocation();
     // const bookingData = location.state;
     const bookingData = useLoaderData();
+ 
+
+
     
 
 
@@ -166,6 +178,11 @@ const MyBooking = () => {
     const { roomNumber, type, price, description, bedType, selectedDate } = bookingData;
 
     return (
+
+       
+
+
+
         <div className="flex justify-center items-center min-h-screen bg-gray-100">
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
@@ -187,3 +204,4 @@ const MyBooking = () => {
 };
 
 export default MyBooking;
+

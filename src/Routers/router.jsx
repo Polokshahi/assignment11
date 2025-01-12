@@ -53,14 +53,10 @@ const router = createBrowserRouter([
             {
                 path: '/myBookings',
                 element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
-                loader: () => fetch(`http://localhost:3000/myBooking`)
+                loader: () => fetch(`http://localhost:3000/book-room`)
             },
 
-            {
-                path: "/myBookings/:id",
-                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
-                loader: () => fetch("http://localhost:3000/myBooking"), // Fetch all bookings
-            },
+           
 
           
 
