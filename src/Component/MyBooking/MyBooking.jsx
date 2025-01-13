@@ -11,6 +11,8 @@ const MyBooking = () => {
 
   // Cancel booking handler
   const handleCancelBooking = (roomId) => {
+    console.log('Canceling booking for roomId:', roomId);
+  
     Swal.fire({
       title: 'Are you sure?',
       text: 'Do you want to cancel this booking?',
@@ -22,7 +24,7 @@ const MyBooking = () => {
       if (result.isConfirmed) {
         try {
           const response = await fetch('http://localhost:3000/cancel-booking', {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
               'Content-Type': 'application/json',
             },
@@ -30,21 +32,22 @@ const MyBooking = () => {
           });
   
           const data = await response.json();
+          console.log('Response from backend:', data);
+  
           if (data.success) {
             Swal.fire('Cancelled!', 'Your booking has been cancelled.', 'success');
-  
-            // Update the state to reflect the cancellation by removing the cancelled room
-            const updatedRooms = rooms.filter((room) => room.roomId !== roomId);
-            setRooms(updatedRooms); // Update the UI with the remaining rooms
+            setRooms(rooms.filter((room) => room.roomId !== roomId));
           } else {
-            Swal.fire('Error!', 'Failed to cancel the booking.', 'error');
+            Swal.fire('Error!', data.message || 'Failed to cancel the booking.', 'error');
           }
         } catch (error) {
+          console.error('Error canceling booking:', error);
           Swal.fire('Error!', 'An error occurred while canceling the booking.', 'error');
         }
       }
     });
   };
+  
 
   // Review handler
   const handlePostReview = (roomId) => {

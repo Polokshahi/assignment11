@@ -178,10 +178,6 @@ const MyBooking = () => {
 export default MyBooking;
 
 
-
-
-
-
 const express = require('express');
 const cors = require('cors');
 const { MongoClient, ServerApiVersion } = require('mongodb');
@@ -437,7 +433,7 @@ async function run() {
     }
 
     // Route to get all rooms
-    app.get('/rooms', async (req, res) => {
+    app.get('/allroom', async (req, res) => {
       try {
         const rooms = await hotelCollection.find().toArray();
         res.json(rooms);
@@ -447,24 +443,7 @@ async function run() {
     });
 
 
-    // app.post('/myBooking', (req, res) => {
-
-    //   const myBooking = req.body;
-    //   console.log(myBooking);
-    //   res.json({ message: 'Your booking has been confirmed!' });
-
-    //   hotelCollection.insertOne(myBooking);
-
-    // })
-
-    // app.get('/myBooking', async (req, res) => {
-    //   try {
-    //     const myBooking = await hotelCollection.find().toArray();
-    //     res.json(myBooking);
-    //   } catch (error) {
-    //     res.status(500).json({ error: 'Failed to fetch booking data' });
-    //   }
-    // });
+    
 
 
     app.post('/book-room', (req, res) => {
@@ -545,29 +524,7 @@ async function run() {
 
 
 
-// async function run() {
-//   try {
-//     // Connect to MongoDB
-//     await client.connect();
-//     const database = client.db("BookHotel");
-//     const BookData = database.collection("BookData");
 
-
-//      // Insert room data into MongoDB (if not already present)
-  
-    
-
-
-
-
-//     // Ping MongoDB to confirm connection
-//     await client.db("admin").command({ ping: 1 });
-//     console.log("Successfully connected to MongoDB!");
-
-//   } catch (error) {
-//     console.error('Error connecting to MongoDB:', error);
-//   }
-// }
 
 
 
@@ -603,6 +560,4 @@ app.get('/api', (req, res) => {
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
-
-
 
