@@ -8,7 +8,10 @@ export const AuthContext = createContext();
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
-    const provider = new GoogleAuthProvider();
+    // const provider = new GoogleAuthProvider();
+ const [email, setEmail] = useState('')
+  const [rating, setRating] = useState(0);
+  const [ratingCount, setRatingCount] = useState(0)
 
 
 
@@ -80,7 +83,14 @@ const logOut = () => {
         loading,
         setUser,
         user,
-        logOut
+        logOut,
+        setRatingCount,
+        ratingCount,
+        setRating,
+        email,
+        setEmail,
+        rating
+
 
       
                 

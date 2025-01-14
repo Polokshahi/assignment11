@@ -6,11 +6,13 @@ import Home from "../Page/Home";
 import MainLayout from "../Layout/MainLayout";
 import Login from "../Page/Login";
 import Register from "../Page/Register";
-import MyBooking from "../Component/MyBooking/MyBooking";
+// import MyBooking from "../Component/MyBooking/MyBooking";
 import Rooms from "../Component/Rooms/Rooms";
 import ErrorPage from "../Page/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
-import RoomDetailsPage from "../Component/Rooms/RoomDetailsPage";
+// import RoomDetailsPage from "../Component/Rooms/RoomDetailsPage";
+import RoomDetails from "../Component/Rooms/RoomDetails";
+import MyBookings from "../Component/MyBooking/MyBookings";
 
 
 
@@ -28,13 +30,13 @@ const router = createBrowserRouter([
             },
 
             {
-                path: 'login',
+                path: '/login',
                 element: <Login></Login>
                 
             },
 
             {
-                path: 'register',
+                path: '/register',
                 element: <Register></Register>
             },
           
@@ -43,17 +45,20 @@ const router = createBrowserRouter([
                 path: '/rooms',
                 element: <Rooms></Rooms>
             },
-            {
-                path: '/rooms/room_details_page/:roomId',
-                element: <RoomDetailsPage></RoomDetailsPage>,
-                loader: () => fetch(`http://localhost:3000/allroom`)
-                
+           
 
-            },
             {
-                path: '/myBookings',
-                element: <PrivateRoute><MyBooking></MyBooking></PrivateRoute>,
-                loader: () => fetch(`http://localhost:3000/book-room`)
+                path: "/rooms/:id",
+                element: <RoomDetails></RoomDetails>,
+              },
+
+
+
+
+            {
+                path: '/bookings',
+                element: <PrivateRoute><MyBookings></MyBookings></PrivateRoute>,
+                loader: () =>fetch('http://localhost:3000/bookings')
             },
 
            
