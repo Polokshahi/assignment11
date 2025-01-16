@@ -6,8 +6,12 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import SectionTitle from '../../Page/Shared/SectionsTitle';
+import { useEffect } from 'react';
 
 const Rooms = () => {
+  useEffect(() => {
+    document.title = "Room";
+  },[]);
 
     const {
         data: rooms = [],
@@ -28,10 +32,7 @@ const Rooms = () => {
         return (
             <div className="mt-10 mb-24">
                 <SectionTitle
-                    title={"Explore Our Luxurious Accommodations"}
-                    description={
-                        "Discover the perfect room tailored to your needs, from cozy singles to opulent suites, all designed for ultimate comfort."
-                    }
+                    title={"Luxurious Accommodations"}
                 ></SectionTitle>
                 <div className="text-center mt-20">
                     <span className="loading loading-ring loading-lg"></span>
@@ -47,7 +48,7 @@ const Rooms = () => {
         );
     }
 
-
+      
 
 
 
@@ -60,10 +61,8 @@ const Rooms = () => {
 
         <div className="mt-10">
             <SectionsTitle
-                title={"Explore Our Luxurious Accommodations"}
-                description={
-                    "Discover the perfect room tailored to your needs, from cozy singles to opulent suites, all designed for ultimate comfort."
-                }
+                title={"Luxurious Accommodations"}
+
             ></SectionsTitle>
             <div className="mt-10 mb-20 container mx-auto px-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
                 {Array.isArray(rooms) &&

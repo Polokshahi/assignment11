@@ -4,13 +4,16 @@ import axios from "axios";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Swal from "sweetalert2";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactStars from "react-rating-stars-component";
 import SectionTitle from "../../Page/Shared/SectionsTitle";
 import { AuthContext } from "../../AuthProvider/Provider";
 import moment from "moment/moment";
 
 const RoomDetails = () => {
+   useEffect(() => {
+      document.title = "Room Details";
+    },[]);
   const navigate = useNavigate();
   const location = useLocation();
   const { user } = useContext(AuthContext);
@@ -194,7 +197,7 @@ const RoomDetails = () => {
                   <span className="font-bold">Availability : </span>
                   {availability ? "Available" : "Not Available"}
                 </p>
-                <div className="flex items-center gap-1">
+                {/* <div className="flex items-center gap-1">
                   <span className="font-bold">Rating : </span>
                   <span className="flex items-center gap-5">
                     {`${rating}/${ratingCount}`}
@@ -209,7 +212,7 @@ const RoomDetails = () => {
                       />
                     ) : ""}
                   </span>
-                </div>
+                </div> */}
                 <p>
                   <span className="font-bold">Price : </span>${price}{" "}
                   /night
