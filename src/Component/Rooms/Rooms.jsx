@@ -28,6 +28,8 @@ const Rooms = () => {
 
     // console.log(rooms);
 
+
+
     if (isLoading) {
         return (
             <div className="mt-10 mb-24">
@@ -48,6 +50,9 @@ const Rooms = () => {
         );
     }
 
+
+
+   
       
 
 
@@ -64,6 +69,8 @@ const Rooms = () => {
                 title={"Luxurious Accommodations"}
 
             ></SectionsTitle>
+
+           
             <div className="mt-10 mb-20 container mx-auto px-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-center">
                 {Array.isArray(rooms) &&
                     rooms?.map((room) => (

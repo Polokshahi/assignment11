@@ -29,41 +29,63 @@ const BookingCard = ({ booking }) => {
   // Function to handle updating the booking date in the backend
   const updateBookingDate = async () => {
     try {
-      // Make a PATCH request to the backend to update the end date
-      const response = await fetch(`http://localhost:3000/bookings/update/${_id}`, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ endDate: newEndDate }), // Send the new end date
+      // Show a confirmation modal
+      const result = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to update the booking date?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!',
+        cancelButtonText: 'No, keep it',
       });
-
-      // Check if the request was successful
-      if (response.ok) {
-        Swal.fire({
-          title: 'Success!',
-          text: 'Booking date updated successfully!',
-          icon: 'success',
-          confirmButtonText: 'Okay',
+  
+      if (result.isConfirmed) {
+        // Proceed with the update if the user confirms
+        const response = await fetch(`http://localhost:3000/bookings/update/${_id}`, {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ endDate: newEndDate }), // Send the new end date
         });
+  
+        if (response.ok) {
+          Swal.fire({
+            title: 'Success!',
+            text: 'Booking date updated successfully!',
+            icon: 'success',
+            confirmButtonText: 'Okay',
+          });
+        } else {
+          Swal.fire({
+            title: 'Error',
+            text: 'Failed to update booking date.',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          });
+        }
       } else {
+        // Notify the user that the update was canceled
         Swal.fire({
-          title: 'Error',
-          text: 'Failed to update booking date.',
-          icon: 'error',
-          confirmButtonText: 'Try Again',
+          title: 'Canceled',
+          text: 'The booking date was not updated.',
+          icon: 'info',
+          confirmButtonText: 'Okay',
         });
       }
     } catch (error) {
       console.error('Error updating booking date:', error);
       Swal.fire({
         title: 'Error',
-        text: 'Error updating booking date.',
+        text: 'An error occurred while updating the booking date.',
         icon: 'error',
         confirmButtonText: 'Okay',
       });
     }
   };
+  
 
   // Function to handle deleting the booking with SweetAlert2
     // Function to handle deleting the booking with a confirmation modal

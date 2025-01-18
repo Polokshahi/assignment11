@@ -1,15 +1,8 @@
-import { Carousel } from "@material-tailwind/react";
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 
 const Slider = () => {
-    const navigate = useNavigate(); // Hook for navigation
-
-    const handleRedirect = () => {
-        navigate('/rooms'); // Redirects to the Rooms page
-    };
-
     return (
-        <div className="relative">
+        <div className="">
             <div className="carousel w-full">
                 <div id="item1" className="carousel-item w-full">
                     <img
