@@ -59,7 +59,7 @@ const router = createBrowserRouter([
                         <MyBookings></MyBookings>
                     </PrivateRoute>
                 ),
-                loader: () =>fetch('http://localhost:3000/bookings')
+                // loader: () =>fetch('http://localhost:3000/bookings')
             },
 
            

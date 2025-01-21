@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import Swal from 'sweetalert2';  // Import SweetAlert2
+import React, { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import Swal from 'sweetalert2';
+import 'react-datepicker/dist/react-datepicker.css';
 
-const BookingCard = ({ booking }) => {
-     useEffect(() => {
-          document.title = "My Bookings";
-        },[]);
+const BookingCard = ({ booking, onCancel, onUpdateDate }) => {
   const {
     _id,
+    roomId,
     image,
     bedType,
     type,
@@ -17,188 +17,72 @@ const BookingCard = ({ booking }) => {
     bookedBy,
   } = booking;
 
-  // The state for the new end date, initialized with the current endDate
-  const [newEndDate, setNewEndDate] = useState(endDate);
+  // Ensure the endDate is a valid date. If not, set it to the current date.
+  const [selectedDate, setSelectedDate] = useState(() => {
+    const validEndDate = new Date(endDate);
+    return isNaN(validEndDate.getTime()) ? new Date() : validEndDate; // Fallback to current date if invalid
+  });
 
-  // Handler for updating the end date
-  const handleDateChange = (e) => {
-    setNewEndDate(e.target.value); // Update state with the new date value
-  };
-
-  // Function to handle updating the booking date in the backend
-  const updateBookingDate = async () => {
-    try {
-      // Show a confirmation modal
-      const result = await Swal.fire({
-        title: 'Are you sure?',
-        text: 'Do you want to update the booking date?',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, update it!',
-        cancelButtonText: 'No, keep it',
-      });
-  
-      if (result.isConfirmed) {
-        // Proceed with the update if the user confirms
-        const response = await fetch(`http://localhost:3000/bookings/update/${_id}`, {
-          method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ endDate: newEndDate }), // Send the new end date
-        });
-  
-        if (response.ok) {
-          Swal.fire({
-            title: 'Success!',
-            text: 'Booking date updated successfully!',
-            icon: 'success',
-            confirmButtonText: 'Okay',
-          });
-        } else {
-          Swal.fire({
-            title: 'Error',
-            text: 'Failed to update booking date.',
-            icon: 'error',
-            confirmButtonText: 'Try Again',
-          });
-        }
-      } else {
-        // Notify the user that the update was canceled
-        Swal.fire({
-          title: 'Canceled',
-          text: 'The booking date was not updated.',
-          icon: 'info',
-          confirmButtonText: 'Okay',
-        });
-      }
-    } catch (error) {
-      console.error('Error updating booking date:', error);
-      Swal.fire({
-        title: 'Error',
-        text: 'An error occurred while updating the booking date.',
-        icon: 'error',
-        confirmButtonText: 'Okay',
-      });
-    }
-  };
-  
-
-  // Function to handle deleting the booking with SweetAlert2
-    // Function to handle deleting the booking with a confirmation modal
-const handleDelete = async () => {
-  try {
-    // Show a confirmation modal with Yes and No options
-    const result = await Swal.fire({
+  const handleCancel = () => {
+    Swal.fire({
       title: 'Are you sure?',
-      text: "Do you want to cancel this booking?",
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
       confirmButtonText: 'Yes, cancel it!',
       cancelButtonText: 'No, keep it',
-    });
-
-    if (result.isConfirmed) {
-      // Call the delete API endpoint to cancel the booking
-      const response = await fetch(`http://localhost:3000/bookings/cancel/${_id}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        Swal.fire({
-          title: 'Booking Canceled!',
-          text: 'Your booking has been successfully canceled.',
-          icon: 'success',
-          confirmButtonText: 'Okay',
-        });
-      } else {
-        Swal.fire({
-          title: 'Error',
-          text: 'Failed to cancel booking.',
-          icon: 'error',
-          confirmButtonText: 'Try Again',
-        });
+    }).then((result) => {
+      if (result.isConfirmed) {
+        onCancel(_id); // Pass the booking ID to cancel it
+        Swal.fire('Canceled!', 'Your booking has been canceled.', 'success');
       }
-    } else {
-      Swal.fire({
-        title: 'Canceled',
-        text: 'Your booking is safe.',
-        icon: 'info',
-        confirmButtonText: 'Okay',
-      });
-    }
-  } catch (error) {
-    console.error('Error canceling booking:', error);
-    Swal.fire({
-      title: 'Error',
-      text: 'Error canceling booking.',
-      icon: 'error',
-      confirmButtonText: 'Okay',
     });
-  }
-};
+  };
 
+  const handleDateChange = (date) => {
+    setSelectedDate(date); // Update the selected date in the state
+  };
+
+  const handleUpdateDate = () => {
+    // Call the onUpdateDate function passed as a prop to update the end date
+    onUpdateDate(_id, selectedDate);
+    Swal.fire('Updated!', 'Your booking date has been updated.', 'success');
+  };
 
   return (
-    <div className="card w-full bg-base-100 shadow-xl p-4 border-2">
+    <div className="card card-compact bg-base-100 w-full md:w-96 shadow-xl">
       <figure>
         <img
           src={image}
           alt={`Room ${roomNumber}`}
-          className="rounded-lg w-[500px] h-[200px]"
+          className="w-full h-48 object-cover"
         />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-lg font-bold">Room {roomNumber}</h2>
-        <p>
-          <span className="font-semibold">Type:</span> {type}
-        </p>
-        <p>
-          <span className="font-semibold">Bed Type:</span> {bedType}
-        </p>
-        <p>
-          <span className="font-semibold">Price per Night:</span> ${price}
-        </p>
-        <p>
-          <span className="font-semibold">Start Date:</span> {startDate}
-        </p>
-        <p>
-          <span className="font-semibold">End Date:</span> {endDate}
-        </p>
-        <p>
-          <span className="font-semibold">Booked By:</span> {bookedBy}
-        </p>
+        <h2 className="card-title">Room Number: {roomNumber}</h2>
+        <p><strong>Room Type:</strong> {type}</p>
+        <p><strong>Bed Type:</strong> {bedType}</p>
+        <p><strong>Price:</strong> ${price}</p>
+        <p><strong>Start Date:</strong> {startDate}</p>
+        <p><strong>End Date:</strong> {endDate}</p>
+        <p><strong>Booked By:</strong> {bookedBy}</p>
 
-        {/* Date Picker and Update Button */}
-        <div className="mt-4">
-          <input
-            type="date"
-            value={newEndDate}
-            onChange={handleDateChange} // Update the date when user selects a new date
-            className="input input-bordered w-full max-w-xs"
+        {/* Date Picker Input Field */}
+        <div className="flex justify-center mt-4">
+          <label className="mr-2">Select New Date:</label>
+          <DatePicker
+            selected={selectedDate} // Pass the selected date to the DatePicker
+            onChange={handleDateChange} // Update the selected date on change
+            className="input input-bordered"
+            dateFormat="yyyy/MM/dd"
+            placeholderText="Select a date"
           />
-    
-
-        <div className='flex gap-3 items-center mt-3'>
-        <button
-            onClick={updateBookingDate} // Call updateBookingDate function on click
-            className="btn btn-primary mt-2"
-          >
-            Update Date
-          </button>
-
-          <button
-            onClick={handleDelete} // Call handleDelete function on click
-            className="btn btn-secondary mt-2"
-          >
-            Cancel Booking
-          </button>
-       
         </div>
+
+        {/* Buttons */}
+        <div className="flex gap-2 mt-4">
+          <button className="btn bg-teal-600 text-white" onClick={handleUpdateDate}>Update Date</button>
+          <button className="btn bg-red-500 text-white" onClick={handleCancel}>Cancel Booking</button>
         </div>
       </div>
     </div>
