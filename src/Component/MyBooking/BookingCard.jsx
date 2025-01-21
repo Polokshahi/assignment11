@@ -7,7 +7,6 @@ const BookingCard = ({ booking }) => {
         },[]);
   const {
     _id,
-    roomId,
     image,
     bedType,
     type,

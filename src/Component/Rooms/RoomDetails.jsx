@@ -5,7 +5,6 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 import Swal from "sweetalert2";
 import { useContext, useEffect, useState } from "react";
-import ReactStars from "react-rating-stars-component";
 import SectionTitle from "../../Page/Shared/SectionsTitle";
 import { AuthContext } from "../../AuthProvider/Provider";
 import moment from "moment/moment";
@@ -197,22 +196,7 @@ const RoomDetails = () => {
                   <span className="font-bold">Availability : </span>
                   {availability ? "Available" : "Not Available"}
                 </p>
-                {/* <div className="flex items-center gap-1">
-                  <span className="font-bold">Rating : </span>
-                  <span className="flex items-center gap-5">
-                    {`${rating}/${ratingCount}`}
-                    {rating ? (
-                      <ReactStars
-                        count={5}
-                        value={rating}
-                        size={30}
-                        activeColor="#ffd700"
-                        edit={false}
-                        isHalf={true}
-                      />
-                    ) : ""}
-                  </span>
-                </div> */}
+               
                 <p>
                   <span className="font-bold">Price : </span>${price}{" "}
                   /night
@@ -266,13 +250,6 @@ const RoomDetails = () => {
                   <div>
                     <div className="flex items-center justify-between mt-5 gap-5">
                       <h3 className="font-semibold text-md">Review :</h3>
-                      <ReactStars
-                        count={5}
-                        size={30}
-                        value={review.rating}
-                        activeColor="#ffd700"
-                        edit={false}
-                      />
                     </div>
                   </div>
                   <div>

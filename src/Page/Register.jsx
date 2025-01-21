@@ -5,10 +5,8 @@ import { updateProfile } from 'firebase/auth';
 import { auth } from '../Firebase.init';
 
 const Register = () => {
-
-    const {register, setUser} = useContext(AuthContext);
+    const { register, setUser } = useContext(AuthContext);
     const navigate = useNavigate();
-
 
     const handleRegister = e => {
         e.preventDefault();
@@ -18,34 +16,28 @@ const Register = () => {
         const photoURL = e.target.photoURL.value;
         const password = e.target.password.value;
 
-        console.log(name, email, photoURL, password)
+        console.log(name, email, photoURL, password);
 
         register(email, password)
-        .then(result => {
-            console.log(result)
-            setUser(result)
-            updateProfile(auth.currentUser, {
-                displayName: name,
-                photoURL: photoURL
+            .then(result => {
+                console.log(result);
+                setUser(result.user); // Set the user once registration is successful
+
+                // Now update the user's profile
+                updateProfile(auth.currentUser, {
+                    displayName: name,
+                    photoURL: photoURL
+                }).then(() => {
+                    navigate('/'); // Navigate to the homepage after updating profile
+                }).catch(error => {
+                    console.log("Error updating profile:", error);
+                });
             })
-            navigate('/');
+            .catch(error => {
+                console.log("Error registering:", error);
 
-        })
-        .catch(error => console.log(error))
-        setUser('')
-
-
-        
-
-
-
+            });
     }
-
-
-
-
-
-
 
     return (
         <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -61,8 +53,6 @@ const Register = () => {
                             type="text"
                             id="name"
                             name='name'
-                           
-
                             className="w-full p-2 border border-gray-300 rounded-md"
                             placeholder="Enter your name"
                         />
@@ -75,8 +65,6 @@ const Register = () => {
                             type="email"
                             id="email"
                             name='email'
-
-
                             className="w-full p-2 border border-gray-300 rounded-md"
                             placeholder="Enter your email"
                         />
@@ -106,9 +94,6 @@ const Register = () => {
                         />
                     </div>
 
-                    {/* Error Message */}
-                    {/* {error && <p className="text-red-500 text-sm">{error}</p>} */}
-
                     {/* Submit Button */}
                     <button
                         type="submit"
@@ -125,8 +110,13 @@ const Register = () => {
                         <Link to="/login" className="text-blue-500 hover:underline">Login here</Link>
                     </p>
                 </div>
+
+
+
             </div>
+          
         </div>
+        
     );
 };
 

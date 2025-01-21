@@ -1,28 +1,37 @@
-import React, { useContext } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/Provider';
 
 const NavBar = () => {
-
     const { user, logOut } = useContext(AuthContext);
+    const [isLoggedOut, setIsLoggedOut] = useState(false);
+    const navigate = useNavigate(); // Add useNavigate hook
 
+    const link = (
+        <>
+            <li><NavLink to="/">Home</NavLink></li>
+            <li><NavLink to="/rooms">Rooms</NavLink></li>
+            <li><NavLink to="/bookings">My Bookings</NavLink></li>
+        </>
+    );
 
+    const handleLogout = async () => {
+        await logOut(); 
+        setIsLoggedOut(true);
+        navigate('/login'); // Redirect to login after successful logout
+    };
 
+    // Reset the logout state if the user is still logged in
+    useEffect(() => {
+        if (user) {
+            setIsLoggedOut(false); 
+        }
+    }, [user]);
 
-
-    const link = <>
-        <li><NavLink to="/">Home</NavLink></li>
-        <li><NavLink to="/rooms">Rooms</NavLink></li>
-        <li><NavLink to="/bookings">My Bookings</NavLink></li>
-
-
-
-    </>
     return (
-        <div className="navbar bg-base-100">
+        <div className="navbar bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white shadow-lg rounded-xl mt-2">
             <div className="navbar-start">
                 <div className="dropdown">
-
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -43,30 +52,38 @@ const NavBar = () => {
                         {link}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">Hotel 11</a>
+                <a className="btn btn-ghost text-xl text-white">Hotel 11</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     {link}
                 </ul>
             </div>
-
-
-
-
             <div className="navbar-end px-2 gap-6">
-
-            {
-                user ? <div className="w-11 rounded-full overflow-hidden">
-                <img
-                    alt="Tailwind CSS Navbar component"
-                    src={user?.photoURL} />
-            </div> : ''
-            }
-
-                {user ? <button onClick={logOut} className='btn'><NavLink to={'/login'}>LogOut</NavLink></button> : <button className='btn'><NavLink to={'/login'}>Login</NavLink></button>}
-                {user ? '' : <button className='btn'><NavLink to={'/register'}>Register</NavLink></button>}
-
+                {user && user.email ? (
+                    <div className="w-11 rounded-full overflow-hidden">
+                        <img alt="User Avatar" src={user?.photoURL} />
+                    </div>
+                ) : ''}
+                {user && user.email ? (
+                    <button
+                        onClick={handleLogout}
+                        className="btn bg-red-500 hover:bg-red-600 text-white"
+                    >
+                        LogOut
+                    </button>
+                ) : (
+                    !isLoggedOut && (
+                        <>
+                            <button className="btn bg-green-500 hover:bg-green-600 text-white">
+                                <NavLink to="/login">Login</NavLink>
+                            </button>
+                            <button className="btn bg-blue-500 hover:bg-blue-600 text-white">
+                                <NavLink to="/register">Register</NavLink>
+                            </button>
+                        </>
+                    )
+                )}
             </div>
         </div>
     );
