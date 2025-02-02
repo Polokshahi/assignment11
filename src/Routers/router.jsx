@@ -59,7 +59,7 @@ const router = createBrowserRouter([
                         <MyBookings></MyBookings>
                     </PrivateRoute>
                 ),
-                // loader: () =>fetch('http://localhost:3000/bookings')
+                // loader: () =>fetch('https://assignment11-server-side-nine.vercel.app/bookings')
             },
 
            

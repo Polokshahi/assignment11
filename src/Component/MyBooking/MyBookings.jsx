@@ -7,13 +7,13 @@ const MyBookings = () => {
   const [bookings, setBookings] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/bookings?email=${user.email}`)
+    fetch(`https://assignment11-server-side-nine.vercel.app/bookings?email=${user.email}`)
       .then(res => res.json())
       .then(data => setBookings(data))
   }, [user.email]);
 
   const handleCancelBooking = (bookingId) => {
-    fetch(`http://localhost:3000/bookings/cancel/${bookingId}`, {
+    fetch(`https://assignment11-server-side-nine.vercel.app/bookings/cancel/${bookingId}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -28,7 +28,7 @@ const MyBookings = () => {
   };
 
   const handleUpdateDate = (bookingId, newEndDate) => {
-    fetch(`http://localhost:3000/bookings/update-end-date/${bookingId}`, {
+    fetch(`https://assignment11-server-side-nine.vercel.app/bookings/update-end-date/${bookingId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

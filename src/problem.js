@@ -21,7 +21,7 @@ const MyBooking = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await fetch('http://localhost:3000/cancel-booking', {
+          const response = await fetch('https://assignment11-server-side-nine.vercel.app/cancel-booking', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const MyBooking = () => {
         const reviewText = result.value;
 
         try {
-          const response = await fetch('http://localhost:3000/post-review', {
+          const response = await fetch('https://assignment11-server-side-nine.vercel.app/post-review', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -97,7 +97,7 @@ const MyBooking = () => {
         const newDate = result.value;
 
         try {
-          const response = await fetch('http://localhost:3000/update-booking-date', {
+          const response = await fetch('https://assignment11-server-side-nine.vercel.app/update-booking-date', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
