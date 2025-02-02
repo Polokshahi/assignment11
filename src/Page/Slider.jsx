@@ -1,36 +1,61 @@
-import React from 'react';
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 
 const Slider = () => {
+    const fashionSlides = [
+        {
+          image: '../../public/hotel1.jpeg',
+          title: "Spring Collection 2025",
+          description: "Experience the freshness of spring with our vibrant designs."
+        },
+        {
+          image: '../../public/hotel2.jpeg',
+          title: "Summer Vibes",
+          description: "Stay cool and stylish with our summer collection."
+        },
+        {
+          image: '../../public/hotel3.jpeg',
+          title: "Autumn Elegance",
+          description: "Warm tones and cozy styles for the perfect autumn look."
+        },
+        {
+          image: '../../public/hotel4.jpeg',
+          title: "Winter Glam",
+          description: "Bundle up in style with luxurious winter wear."
+        }
+      ];
+
     return (
         <div className="">
-            <div className="carousel w-full">
-                <div id="item1" className="carousel-item w-full">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-                        className="w-full" />
-                </div>
-                <div id="item2" className="carousel-item w-full">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-                        className="w-full" />
-                </div>
-                <div id="item3" className="carousel-item w-full">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-                        className="w-full" />
-                </div>
-                <div id="item4" className="carousel-item w-full">
-                    <img
-                        src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-                        className="w-full" />
-                </div>
+               <div className="max-w-5xl mx-auto p-4">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay]}
+        navigation
+        pagination={{ clickable: true }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        loop
+        className="rounded-2xl shadow-lg overflow-hidden"
+      >
+        {fashionSlides.map((slide, index) => (
+          <SwiperSlide key={index} className="relative">
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-96 object-cover"
+            />
+            <div className="absolute bottom-4 left-4 bg-black bg-opacity-50 text-white p-4 rounded-lg">
+              <h2 className="text-xl font-bold">{slide.title}</h2>
+              <p className="text-sm">{slide.description}</p>
             </div>
-            <div className="flex w-full justify-center gap-2 py-2">
-                <a href="#item1" className="btn btn-xs">1</a>
-                <a href="#item2" className="btn btn-xs">2</a>
-                <a href="#item3" className="btn btn-xs">3</a>
-                <a href="#item4" className="btn btn-xs">4</a>
-            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
         </div>
     );
 };

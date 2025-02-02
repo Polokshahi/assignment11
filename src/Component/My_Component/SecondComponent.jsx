@@ -1,4 +1,3 @@
-import React from 'react';
 
 const SecondComponent = () => {
     const amenities = [
@@ -18,7 +17,7 @@ const SecondComponent = () => {
       ];
 
     return (
-        <div className="container mx-auto px-3">
+        <div className=" container mx-auto px-3">
 
             <h1 className='font-extrabold text-4xl text-center mt-5 mb-5'>Our Services</h1>
        
