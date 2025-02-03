@@ -14,7 +14,7 @@ Project Overview
 This project involves creating a modern Hotel Booking Platform designed to offer users a seamless experience for discovering and booking hotel rooms. It combines interactive design, robust functionality, and secure user authentication for a trustworthy platform.
 
 Live URL
-Deployed Project Link ----
+Deployed Project Link ----https://elegant-madeleine-5eaee4.netlify.app/
 
 Key Features
 General
