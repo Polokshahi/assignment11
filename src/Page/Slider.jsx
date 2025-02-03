@@ -9,22 +9,22 @@ import "swiper/css/pagination";
 const Slider = () => {
     const fashionSlides = [
         {
-          image: '/public/hotel1.jpeg',
+          image: 'https://c4.wallpaperflare.com/wallpaper/624/380/1000/life-resort-hotel-resort-hotel-wallpaper-preview.jpg',
           title: "Spring Collection 2025",
           description: "Experience the freshness of spring with our vibrant designs."
         },
         {
-          image: '/public/hotel2.jpeg',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzyK-cmgC_p9EXeFptOpJm4qVqfoz1m4x2nA&s',
           title: "Summer Vibes",
           description: "Stay cool and stylish with our summer collection."
         },
         {
-          image: '/public/hotel3.jpeg',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScob7Gv-KVaxoWzvfdXwUUu6nRvngMYP__446UIryi09HT_s5Uce02vdDsXqAq-y8i8AM&usqp=CAU',
           title: "Autumn Elegance",
           description: "Warm tones and cozy styles for the perfect autumn look."
         },
         {
-          image: '/public/hotel4.jpeg',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhGMtmazAY8fpX3gfrLkGa1qoRNwCerJdvUUNhElF_1g0SrzO37RG3VbafeYCG_Opgd6U&usqp=CAU',
           title: "Winter Glam",
           description: "Bundle up in style with luxurious winter wear."
         }
