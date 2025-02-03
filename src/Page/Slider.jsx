@@ -9,22 +9,22 @@ import "swiper/css/pagination";
 const Slider = () => {
     const fashionSlides = [
         {
-          image: 'https://ibb.co.com/JRtFhKTF',
+          image: '../../public/hotel1.jpeg',
           title: "Spring Collection 2025",
           description: "Experience the freshness of spring with our vibrant designs."
         },
         {
-          image: 'https://ibb.co.com/bgLnNzfb',
+          image: '../../public/hotel2.jpeg',
           title: "Summer Vibes",
           description: "Stay cool and stylish with our summer collection."
         },
         {
-          image: 'https://ibb.co.com/xq7bM6Tv',
+          image: '../../public/hotel3.jpeg',
           title: "Autumn Elegance",
           description: "Warm tones and cozy styles for the perfect autumn look."
         },
         {
-          image: 'https://ibb.co.com/tPw88FdL',
+          image: '../../public/hotel4.jpeg',
           title: "Winter Glam",
           description: "Bundle up in style with luxurious winter wear."
         }
