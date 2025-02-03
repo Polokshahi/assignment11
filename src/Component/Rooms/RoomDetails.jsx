@@ -26,7 +26,7 @@ const RoomDetails = () => {
   const handleDateChange = (e) => setStartDate(e.target.value);
 
   const param = useParams();
-  console.log(param);
+  // console.log(param);
   const id = param.id;
   const {
     data: roomInfo = {},

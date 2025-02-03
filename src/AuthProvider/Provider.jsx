@@ -61,7 +61,7 @@ const Provider = ({ children }) => {
                 setUser(curentUser);
                 setLoading(false);
             } else {
-                console.log('No User LoggedIn')
+                // console.log('No User LoggedIn')
             }
 
 
